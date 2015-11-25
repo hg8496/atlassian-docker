@@ -12,7 +12,7 @@ RUN apt-add-repository ppa:webupd8team/java -y
 RUN apt-get update
 RUN apt-get install oracle-java8-installer -y
 RUN /usr/sbin/groupadd atlassian
-RUN /usr/sbin/useradd --create-home --home-dir /opt/atlassian --groups atlassian --shell /bin/bash atlassian
+RUN /usr/sbin/useradd --create-home --home-dir /opt/atlassian -g atlassian --shell /bin/bash atlassian
 RUN mkdir -p /opt/atlassian-home
 RUN chown -R atlassian:atlassian /opt/atlassian-home
 RUN apt-get clean
