@@ -3,6 +3,7 @@ MAINTAINER hg8496@cstolz.de
 
 ADD own-volume.sh /usr/local/bin/own-volume
 ADD setup_server_xml.sh /usr/local/bin/setup_server_xml.sh
+ADD db_extract.sh /usr/local/bin/db_extract.sh
 
 #RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
