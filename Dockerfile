@@ -17,8 +17,10 @@ RUN /usr/sbin/groupadd atlassian
 RUN /usr/sbin/useradd --create-home --home-dir /opt/atlassian -g atlassian --shell /bin/bash atlassian
 RUN mkdir -p /opt/atlassian-home
 RUN chown -R atlassian:atlassian /opt/atlassian-home
+RUN curl https://www.startssl.com/certs/ca.crt -o /tmp/ca.crt
+RUN keytool -import -trustcacerts -keystore /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts -storepass changeit -alias startcom.ca -file /tmp/ca.crt -noprompt
 RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/jira.tar.gz
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN echo "%atlassian ALL=NOPASSWD: /usr/local/bin/own-volume" >> /etc/sudoers
 
 ENV CONTEXT_PATH ROOT
