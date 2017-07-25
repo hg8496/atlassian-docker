@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER hg8496@cstolz.de
 
 ADD own-volume.sh /usr/local/bin/own-volume
@@ -16,10 +16,6 @@ RUN apt-get update \
   && /usr/sbin/useradd --create-home --home-dir /opt/atlassian -g atlassian --shell /bin/bash atlassian \
   && mkdir -p /opt/atlassian-home \
   && chown -R atlassian:atlassian /opt/atlassian-home \
-  && curl https://www.startssl.com/certs/ca.crt -o /tmp/castart.crt \
-  && keytool -import -trustcacerts -keystore /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts -storepass changeit -alias startcom.ca -file /tmp/castart.crt -noprompt \
-  && curl https://www.wosign.com/root/WS_CA1_NEW.crt -o /tmp/cawosign.crt \
-  && keytool -import -trustcacerts -keystore /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts -storepass changeit -alias wosign.ca -file /tmp/cawosign.crt -noprompt \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && echo "%atlassian ALL=NOPASSWD: /usr/local/bin/own-volume" >> /etc/sudoers
